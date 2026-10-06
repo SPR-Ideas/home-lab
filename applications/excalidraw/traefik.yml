@@ -9,10 +9,10 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: excalidraw.local
+  - host: argocd.local
     http:
       paths:
-      - path: /
+      - path: /excalidraw
         pathType: Prefix
         backend:
           service:
