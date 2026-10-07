@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: busybox
-        image: busybox:latest
+        image: hwchiu/netutils:latest
         command:
           - sleep
           - "3600"
