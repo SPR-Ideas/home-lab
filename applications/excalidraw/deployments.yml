@@ -28,7 +28,9 @@ spec:
       containers:
       - name: busybox
         image: busybox:latest
-        command: ['sh', '-c', 'sleep', '1000']
+        command:
+          - sleep
+          - "3600"
       - name: excalidraw
         image: excalidraw/excalidraw:latest
         imagePullPolicy: IfNotPresent
