@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: v1
+kind: Service
+metadata:
+  name: lanOrganiser
+  namespace: default
+  labels:
+    app: lanOrganiser
+spec:
+  type: ClusterIP
+  selector:
+    app: lanOrganiser
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 291
+    protocol: TCP
+  sessionAffinity: None
