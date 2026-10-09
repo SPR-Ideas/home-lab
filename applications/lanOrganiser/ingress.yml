@@ -1,14 +1,14 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: lanOrganiser
+  name: lan-organiser
   namespace: default
 spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`lanOrganiser.local`)
+  - match: Host(`lan-organiser.local`)
     kind: Rule
     services:
-    - name: lanOrganiser
+    - name: lan-organiser
       port: 8081

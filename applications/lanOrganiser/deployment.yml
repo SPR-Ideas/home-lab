@@ -2,17 +2,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lanOrganiser
+  name: lan-organiser
   namespace: default
   labels:
-    app: lanOrganiser
-    app.kubernetes.io/name: lanOrganiser
+    app: lan-organiser
+    app.kubernetes.io/name: lan-organiser
     app.kubernetes.io/version: "1.0.0"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: lanOrganiser
+      app: lan-organiser
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -21,14 +21,14 @@ spec:
   template:
     metadata:
       labels:
-        app: lanOrganiser
-        app.kubernetes.io/name: lanOrganiser 
+        app: lan-organiser
+        app.kubernetes.io/name: lan-organiser 
     spec:
       terminationGracePeriodSeconds: 30
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-      - name: lanOrganiser
+      - name: lan-organiser
         image: ghcr.io/291-group/lan-orangutan:latest
         imagePullPolicy: IfNotPresent
         ports:
