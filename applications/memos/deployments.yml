@@ -26,6 +26,9 @@ spec:
         - name: http
           containerPort: 5230
           protocol: TCP
+        env:
+        - name : _PORT
+          value : 5230
         resources:
           requests:
             cpu: "100m"
