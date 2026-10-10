@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memos
+  namespace: default
+  labels:
+    app: memos
+    app.kubernetes.io/name: memos
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: memos
+  template:
+    metadata:
+      labels:
+        app: memos
+        app.kubernetes.io/name: memos
+    spec:
+      serviceAccountName: memos
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: memos
+        image: neosmemo/memos:stable
+        ports:
+        - name: http
+          containerPort: 5230
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: tmp
+          mountPath: /var/opt/memos
+      volumes:
+      - name: tmp
+        emptyDir: {}

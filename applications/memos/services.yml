@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: v1
+kind: Service
+metadata:
+  name: memos
+  namespace: default
+  labels:
+    app: memos
+spec:
+  type: ClusterIP
+  selector:
+    app: memos
+  ports:
+  - name: http
+    port: 8082
+    targetPort: 5230
+    protocol: TCP
