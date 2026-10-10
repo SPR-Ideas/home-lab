@@ -28,7 +28,7 @@ spec:
           protocol: TCP
         env:
         - name : _PORT
-          value : 5230
+          value : "5230"
         resources:
           requests:
             cpu: "100m"
