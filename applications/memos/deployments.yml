@@ -36,9 +36,9 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
-        volumeMounts:
-        - name: tmp
-          mountPath: /var/opt/memos
-      volumes:
-      - name: tmp
-        emptyDir: {}
+      #   volumeMounts:
+      #   - name: tmp
+      #     mountPath: /var/opt/memos
+      # volumes:
+      # - name: tmp
+      #   emptyDir: {}
