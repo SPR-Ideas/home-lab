@@ -27,7 +27,7 @@ spec:
           containerPort: 5230
           protocol: TCP
         env:
-        - name : _PORT
+        - name : MEMOS_PORT
           value : "5230"
         resources:
           requests:
