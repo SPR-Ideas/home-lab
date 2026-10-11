@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: memos
-        image: neosmemo/memos:stable
+        image: neosmemo/memos:0.30
         ports:
         - name: http
           containerPort: 5230
