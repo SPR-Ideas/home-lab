@@ -1,0 +1,15 @@
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vaultwardern
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`vaultwardern.local`)
+    kind: Rule
+    services:
+    - name: vaultwardern
+      port: 8083

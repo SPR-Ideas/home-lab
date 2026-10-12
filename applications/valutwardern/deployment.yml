@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwardern
+  namespace: default
+  labels:
+    app: vaultwardern
+    app.kubernetes.io/name: vaultwardern
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vaultwardern
+  template:
+    metadata:
+      labels:
+        app: vaultwardern
+        app.kubernetes.io/name: vaultwardern
+    spec:
+      containers:
+      - name: vaultwardern
+        image: vaultwarden/server:latest
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
