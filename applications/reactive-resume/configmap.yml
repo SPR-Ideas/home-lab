@@ -11,15 +11,9 @@
 #     - secretRef:    { name: reactive-resume-secrets }
 ---
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: reactive-resume
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: reactive-resume-config
-  namespace: reactive-resume
 data:
   # --- Application ---
   PORT: "3000"

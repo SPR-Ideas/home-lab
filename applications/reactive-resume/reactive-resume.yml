@@ -29,6 +29,8 @@ spec:
         env:
 
         envFrom:
+          - configMapRef:
+              name: reactive-resume-config
           - secretRef:
               name: reactiv-resume-credentials
         resources:
