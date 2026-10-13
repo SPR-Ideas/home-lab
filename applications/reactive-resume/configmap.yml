@@ -1,0 +1,59 @@
+# Reactive Resume configuration generated from .env
+#
+#   kubectl apply -f reactive-resume-config.yaml
+#
+# Non-sensitive values  -> ConfigMap  reactive-resume-config
+# Passwords / keys      -> Secret     reactive-resume-secrets
+#
+# Use both in the app Deployment with:
+#   envFrom:
+#     - configMapRef: { name: reactive-resume-config }
+#     - secretRef:    { name: reactive-resume-secrets }
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: reactive-resume
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reactive-resume-config
+  namespace: reactive-resume
+data:
+  # --- Application ---
+  PORT: "3000"
+  TRUSTED_PROXIES: ""
+  APP_URL: "http://rr.local"
+  STRICT_SCHEMA_CHECK: "false"
+
+  # --- Custom OAuth Provider (non-secret parts) ---
+  OAUTH_PROVIDER_NAME: ""
+  OAUTH_DISCOVERY_URL: ""
+  OAUTH_AUTHORIZATION_URL: ""
+  OAUTH_TOKEN_URL: ""
+  OAUTH_USER_INFO_URL: ""
+  OAUTH_SCOPES: "openid profile email"
+
+  # --- Email ---
+  SMTP_HOST: ""
+  SMTP_PORT: ""
+  SMTP_FROM: ""
+  SMTP_SECURE: "false"
+
+  # --- Storage (SeaweedFS in the `storage` namespace) ---
+  S3_REGION: "us-east-1"
+  S3_ENDPOINT: "http://seaweedfs.default.svc.cluster.local:8333"
+  S3_BUCKET: "reactive-resume"
+  S3_FORCE_PATH_STYLE: "true"
+
+  # --- Feature Flags ---
+  FLAG_DISABLE_SIGNUPS: "false"
+  FLAG_DISABLE_EMAIL_AUTH: "false"
+  FLAG_DISABLE_IMAGE_PROCESSING: "false"
+  FLAG_DISABLE_API_RATE_LIMIT: "false"
+  FLAG_ALLOW_UNSAFE_OAUTH_REDIRECT_URI: "false"
+  FLAG_ALLOW_UNSAFE_AI_BASE_URL: "false"
+
+  # --- Others ---
+  CROWDIN_PROJECT_ID: ""

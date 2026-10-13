@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-sql
+  namespace: default
+  labels:
+    app: postgres-sql
+    app.kubernetes.io/name: postgres-sql
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-sql
+  template:
+    metadata:
+      labels:
+        app: postgres-sql
+        app.kubernetes.io/name: postgres-sql
+    spec:
+      containers:
+      - name: postgres-sql
+        image: postgres:latest
+        ports:
+        - name: http
+          containerPort: 5432
+          protocol: TCP
+        envFrom:
+          - secretRef:
+              name: reactiv-resume-credentials
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: psql-volume
+          mountPath: /var/lib/postgresql
+      volumes:
+      - name: psql-volume
+        hostPath:
+          path: /volumes/psql
