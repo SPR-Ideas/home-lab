@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lan-organiser
+  namespace: default
+  labels:
+    app: lan-organiser
+    app.kubernetes.io/name: lan-organiser
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lan-organiser
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: lan-organiser
+        app.kubernetes.io/name: lan-organiser 
+    spec:
+      terminationGracePeriodSeconds: 30
+      hostNetwork: true
+      containers:
+      - name: lan-organiser
+        image: ghcr.io/291-group/lan-orangutan:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 291
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"

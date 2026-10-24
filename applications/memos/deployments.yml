@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memos
+  namespace: default
+  labels:
+    app: memos
+    app.kubernetes.io/name: memos
+    app.kubernetes.io/version: "1.0.0"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: memos
+  template:
+    metadata:
+      labels:
+        app: memos
+        app.kubernetes.io/name: memos
+    spec:
+      containers:
+      - name: memos
+        image: neosmemo/memos:0.30
+        ports:
+        - name: http
+          containerPort: 5230
+          protocol: TCP
+        env:
+        - name : MEMOS_PORT
+          value : "5230"
+        - name : MEMOS_INSTANCE_URL
+          value : "http://memos.local"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+      #   volumeMounts:
+      #   - name: tmp
+      #     mountPath: /var/opt/memos
+      # volumes:
+      # - name: tmp
+      #   emptyDir: {}

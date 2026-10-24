@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactive-resume
+  namespace: default
+  labels:
+    app: reactive-resume
+    app.kubernetes.io/name: reactive-resume
+    app.kubernetes.io/version: "1.0.0"
+spec:
+
+  selector:
+    matchLabels:
+      app: reactive-resume
+  template:
+    metadata:
+      labels:
+        app: reactive-resume
+        app.kubernetes.io/name: reactive-resume
+    spec:
+      containers:
+      - name: reactive-resume
+        image: ghcr.io/reactive-resume/reactive-resume:latest
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        env:
+
+        envFrom:
+          - configMapRef:
+              name: reactive-resume-config
+          - secretRef:
+              name: reactiv-resume-credentials
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir: {}

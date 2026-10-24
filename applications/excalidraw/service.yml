@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=kubernetes
+apiVersion: v1
+kind: Service
+metadata:
+  name: excalidraw
+  namespace: default
+  labels:
+    app: excalidraw
+spec:
+  type: ClusterIP
+  selector:
+    app: excalidraw
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 80
+    protocol: TCP
+  sessionAffinity: None

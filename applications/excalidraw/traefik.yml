@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: excalidraw
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`excalidraw.local`)
+    kind: Rule
+    services:
+    - name: excalidraw
+      port: 8080
